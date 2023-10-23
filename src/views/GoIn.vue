@@ -1,6 +1,6 @@
 <template>
   <div class="go-in">
-    <banner img="../assets/img/bgtop.jpg" title="走进科建" />
+    <banner img="../assets/img/bgtop.jpg" title="走进富钢柏益" />
     <div class="section" v-loading="loading">
       <div class="section-content">
         <div class="content-summary">
@@ -8,15 +8,10 @@
             <p class="title">公司简介</p>
             <p class="eTitle">ABOUT US</p>
             <p class="content">
-              上海科建工程管理股份有限公司成立于2012年9月，注册资金500万。公司前身上海科建工程管理有限公司，
-              是一家从事专业工程技术服务及工程项目管理的企业。公司于2017年11月通过国家高新技术企业认定，
-              目前工程管理软件研发团队10人，包括硕士和研究生在内，平均年龄在35岁。公司自主研发工程项目管理
-              标准化+互联网协同工作系统平台，此软件广泛应用于工程项目管理过程，实现全覆盖检查、全过程控制、全方位协调的目标。
-              目前公司业务范围涉及上海、广东等多地，合作的单位有上海同济工程项目管理咨询有限公司、
-              上海华银日用品有限公司、中科建设开发总公司、广东怡轩房地产开发有限公司等多家知名企业。 立人立己、达人达己！公司一直秉承“
-              帮助施工单位解决技术问题、帮助业主解决协调问题 ”的管理理念，上海科建工程管理股份有限公司不断在工程项目管理领域开拓创新，
-              通过不断完善工程项目管理标准化+互联网协同工作系统平台，实现每项工程“无重大安全事故、无重大返工、工程施工材料无伪劣产品、
-              工程管理留下痕迹、施工过程可追溯”五大管理目标。
+              富钢柏益模架科技(德州市)有限公司成立于2018年12月， 位于德州市平原县王杲铺工业园，距德州高铁站30公里、距京沪高速出口12公里、距济南80公里、距北京350公里、105国道旁。 地理位置优越，交通方便。公司占地面积约4万平方米，生产建筑面积约2万平方米，现 有员工100余人，其中专业技术人员20余人。
+            </p>
+            <p class="content">
+            富钢柏益模架科技(德州市)有限公司是一家集建筑模板、桥梁模板、各种支撑体系的研发、设计、制造、销售和服务于一体的专业化高新技术企业。具有极其丰富的模板设计和制造经验。公司拥有先进的生产设备、检验设备和办公设备，先后通过了ISO9001质量管理体系认证、ISO-14001环境管理体系认证。公司坚持“诚信为本、创造双赢、追求卓越、和谐发展”的经营理念。自成立以来，先后与中建、中交、中铁、城建、建工、市政等施工单位强强合作，完成国内外多项大型地产建筑、公路铁路、水电工程的建设任务。公司倡导以人为本，注重高素质高层次人才的引进和培养。为打造一支专业化的精英团队，公司不仅提供一个舒适的工作办公环境，更是建立一系列员工培训与激励制度，对员工的职业素养、业务水平、管理能力进行全方位的培养，以保障公司与员工的长足发展。我公司将用最优质的产品和服务，竭诚与社会各界朋友合作，携手并进，共创辉煌。
             </p>
           </div>
           <div class="summary-right">
@@ -45,8 +40,8 @@
                     </el-divider>
                     <div class="item-bottom" :class="{'order' : one%2===1}">
                       <div class="item-bottom-content">
-                        <p>{{courseOne.Content}}</p>
-                        <p>{{courseOne.Year}}</p>
+                        <p>{{courseOne.content}}</p>
+                        <p>{{courseOne.year}}</p>
                       </div>
                     </div>
                   </div>
@@ -82,8 +77,8 @@
           <ul class="honor-show">
             <li v-for="(honor,index) in honorList" :key="index">
               <img
-                v-lazy="imgserver+honor.Img"
-                @click="dialogTableVisible = true ;dialogUrl = imgserver + honor.Img;dialogTitle= honor.Remark"
+                v-lazy="imgserver+honor.img"
+                @click="dialogTableVisible = true ;dialogUrl = imgserver + honor.img;dialogTitle= honor.remark"
               />
             </li>
           </ul>
@@ -97,7 +92,7 @@
           </div>
           <el-carousel :interval="4000" type="card">
             <el-carousel-item v-for="(team,index) in teamItem" :key="index">
-              <div class="swiper-img" v-lazy:background-image="imgserver + team.Img"></div>
+              <div class="swiper-img" v-lazy:background-image="imgserver + team.img"></div>
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -108,7 +103,7 @@
             <p>RARTNERS</p>
             <ul class="partner-img">
               <li v-for="(partner,i) in partnerImg" :key="i">
-                <img v-lazy="imgserver+partner.Img" alt />
+                <img v-lazy="imgserver+partner.img" alt />
               </li>
             </ul>
           </div>
@@ -148,17 +143,17 @@ export default {
   mounted() {
     this.$http
       .all([
-        this.$http.get("Honor/GetHonorAll"),
-        this.$http.get("Enterprise/GetEnterpriseAll"),
-        this.$http.get(`Team/GetTeamAll`),
-        this.$http.get(`Course/GetCourseAll`)
+        this.$http.get("Honor"),
+        this.$http.get("Enterprise"),
+        this.$http.get(`Team`),
+        this.$http.get(`Course`)
       ])
       .then(
         this.$http.spread(
           (responseHonor, responseEnterprise, responseTeam, responseCourse) => {
-            this.honorList = responseHonor.data;
-            this.partnerImg = responseEnterprise.data;
-            this.teamItem = responseTeam.data;
+            this.honorList = responseHonor.data.result;
+            this.partnerImg = responseEnterprise.data.result;
+            this.teamItem = responseTeam.data.result;
 
             var groupCount = Math.ceil(responseCourse.data.length / 2);
             window.console.log(groupCount);

@@ -16,8 +16,8 @@
           <el-menu-item index="/news">新闻资讯</el-menu-item>
           <el-menu-item index="/product">产品中心</el-menu-item>
           <el-menu-item index="/case">经典案例</el-menu-item>
-          <el-menu-item index="/goin">走进科建</el-menu-item>
-          <el-menu-item index="/download">下载APP</el-menu-item>
+          <el-menu-item index="/goin">走进富钢柏益</el-menu-item>
+          <el-menu-item index="/download">其他</el-menu-item>
         </el-menu>
       </el-header>
       <el-main>
@@ -27,7 +27,7 @@
         <div class="footer-content">
           <ul class="content-nav">
             <li>
-              <p>走进科建</p>
+              <p>走进富钢柏益</p>
               <span>发展历程</span>
               <span>企业文化</span>
               <span>资质荣誉</span>
@@ -47,15 +47,15 @@
             </li>
             <li>
               <p>联系我们</p>
-              <span>邮箱：kejianlml@163.com</span>
-              <span>电话：021-55802368</span>
-              <span>地址：上海市杨浦区翔殷路128号12号楼101</span>
+              <span>邮箱：fgby1688@126.com</span>
+              <span>电话：18911496136</span>
+              <span>地址：山东省德州市平原县王杲铺镇王杲铺工业园</span>
             </li>
           </ul>
           <img src="./assets/img/ercode.png" alt />
         </div>
         <div class="copyright">
-          <span>科建版权所有</span>
+          <span>富钢柏益版权所有</span>
         </div>
       </div>
     </el-container>

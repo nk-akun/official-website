@@ -3,9 +3,9 @@
     <el-button type="primary" @click="openDialog()">新增数据</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="Id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="Year" label="历程年份" width="180"></el-table-column>
-      <el-table-column prop="Content" label="历程内容"></el-table-column>
+      <el-table-column prop="id" label="序号" width="180"></el-table-column>
+      <el-table-column prop="year" label="历程年份" width="180"></el-table-column>
+      <el-table-column prop="content" label="历程内容"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
@@ -56,7 +56,7 @@ export default {
     };
   },
   mounted() {
-    let token = "Browser " + sessionStorage.getItem("token");
+    let token = "Bearer " + sessionStorage.getItem("token");
     //window.console.log(token);
     this.options = {
       headers: {
@@ -70,10 +70,10 @@ export default {
     loadData() {
       this.loading = true;
       this.$http
-        .get("Course/GetCourseAll")
+        .get("Course")
         .then(response => {
           window.console.log(response);
-          this.tableData = response.data;
+          this.tableData = response.data.result;
           this.loading = false;
         })
         .catch(e => {
@@ -101,7 +101,7 @@ export default {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("Course/CreateCourse", this.formData, this.options)
+          .post("Course", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -157,7 +157,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`Course/DeleteCourse?id=${row.Id}`, null, this.options)
+            .post(`Course/${row.id}`, null, this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);

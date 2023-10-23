@@ -3,10 +3,10 @@
     <swiper id="swiperBox" v-bind:options="swiperOption" ref="mySwiper">
       <swiper-slide class="swiper-slide slide-one">
         <div class="page">
-          <h3>科建股份</h3>
-          <p>KeJian Stock</p>
+          <h3>富钢柏益,精益求精</h3>
+          <p>FuGangBaiYi,Keep Improving</p>
         </div>
-        <p class="slogan">立人立己 达人达己</p>
+        <p class="slogan">追求卓越品质</p>
       </swiper-slide>
       <swiper-slide class="swiper-slide slide-two">
         <div class="page">
@@ -17,14 +17,14 @@
           <li
             v-for="(item,index) in caseList"
             :key="index"
-            v-lazy:background-image="imgserver + item.Img"
+            v-lazy:background-image="imgserver + item.img"
           >
             <router-link
               class="text-decoration"
-              :to="{ name: 'casedetails', params: { id: item.Id }}"
+              :to="{ name: 'casedetails', params: { id: item.id }}"
             >
               <div class="case-item-hover">
-                <p class="hover-title">{{item.Title}}</p>
+                <p class="hover-title">{{item.title}}</p>
                 <div class="bottom"></div>
                 <div class="more">
                   <span>MORE</span>
@@ -44,9 +44,9 @@
             <div :style="'order: '+ (i%2==0 ? 1: 3)">
               <router-link
                 class="text-decoration"
-                :to="{ name: 'newsdetails', params: { id: news.Id }}"
+                :to="{ name: 'newsdetails', params: { id: news.id }}"
               >
-                <div class="item-img" v-lazy:background-image="imgserver + news.Img"></div>
+                <div class="item-img" v-lazy:background-image="imgserver + news.img"></div>
               </router-link>
             </div>
             <div style="order: 2">
@@ -55,9 +55,9 @@
               </el-divider>
             </div>
             <div class="item-content" :style="'order: '+ (i%2==0 ? 3: 1)">
-              <h3>{{news.Title}}</h3>
-              <p>{{news.Content}}</p>
-              <span>{{news.CreateTime}}</span>
+              <h3>{{news.title}}</h3>
+              <p>{{news.content}}</p>
+              <span>{{news.createTime}}</span>
             </div>
           </div>
         </div>
@@ -125,13 +125,14 @@ export default {
   mounted() {
     this.$http
       .all([
-        this.$http.get("Cases/GetCasesAll"),
-        this.$http.get(`News?type=1&num=3`)
+        // this.$http.get("Cases/GetCasesAll"),
+        this.$http.get("Cases"),
+        this.$http.get(`News/Search?type=1&count=3`)
       ])
       .then(
         this.$http.spread((responseCases, responseNews) => {
-          this.caseList = responseCases.data;
-          this.newsList = responseNews.data;
+          this.caseList = responseCases.data.result;
+          this.newsList = responseNews.data.result;
           this.loading = false;
         })
       );

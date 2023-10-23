@@ -3,21 +3,21 @@
     <el-button type="primary" @click="openDialog()">新增</el-button>
 
     <el-table :data="tableData" border style="width: 100%" v-loading="loading">
-      <el-table-column prop="Id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="Title" label="新闻标题" width="180"></el-table-column>
-      <el-table-column prop="Img" label="图片">
+      <el-table-column prop="id" label="序号" width="180"></el-table-column>
+      <el-table-column prop="title" label="新闻标题" width="180"></el-table-column>
+      <el-table-column prop="img" label="图片">
         <template slot-scope="scope">
-          <img style="width:100%" :src="imgserver + scope.row.Img" alt />
+          <img style="width:100%" :src="imgserver + scope.row.img" alt />
         </template>
       </el-table-column>
-      <el-table-column prop="Content" label="新闻内容">
+      <el-table-column prop="content" label="新闻内容">
         <template slot-scope="scope">
-          <p v-if="scope.row.Content.length > 100">{{scope.row.Content.substring(0,100)}} ...</p>
-          <p v-else>{{scope.row.Content}}</p>
+          <p v-if="scope.row.content.length > 100">{{scope.row.content.substring(0,100)}} ...</p>
+          <p v-else>{{scope.row.content}}</p>
         </template>
       </el-table-column>
-      <el-table-column prop="Type" label="新闻类别">
-        <template slot-scope="scope">{{scope.row.Type == 1 ? '公司新闻':'行业动态'}}</template>
+      <el-table-column prop="type" label="新闻类别">
+        <template slot-scope="scope">{{scope.row.type == 1 ? '公司新闻':'行业动态'}}</template>
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -43,7 +43,7 @@
         <el-form-item label="新闻图片" :label-width="formLabelWidth">
           <el-upload
             class="avatar-uploader"
-            action="http://shkjgw.shkjem.com/api/UpLoad/UploadImage"
+            action="http://localhost:5001/api/File/UploadingFormFile"
             :headers="headers"
             :show-file-list="false"
             :on-success="handleSuccess"
@@ -90,7 +90,7 @@ export default {
     };
   },
   mounted() {
-    let token = "Browser " + sessionStorage.getItem("token");
+    let token = "Bearer " + sessionStorage.getItem("token");
     //window.console.log(token);
     this.options = {
       headers: {
@@ -106,15 +106,15 @@ export default {
   methods: {
     handleSuccess(response, file, fileList) {
       window.console.log(response, file, fileList);
-      this.formData.Img = response;
+      this.formData.Img = response.result;
     },
     loadData() {
       this.loading = true;
       this.$http
-        .get("News/GetNewsAll?type=0&num=10")
+        .get("News?type=0&num=10")
         .then(response => {
           // window.console.log(response);
-          this.tableData = response.data;
+          this.tableData = response.data.result;
           this.loading = false;
         })
         .catch(e => {
@@ -139,7 +139,7 @@ export default {
       if (!this.formData.Id) {
         this.loading = true;
         this.$http
-          .post("News/CreateNews", this.formData, this.options)
+          .post("News", this.formData, this.options)
           .then(response => {
             window.console.log(response);
             this.loading = false;
@@ -196,7 +196,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`News/DeleteNews?id=${row.Id}`, null, this.options)
+            .post(`News/${row.id}`, null, this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);

@@ -3,13 +3,13 @@
     <el-button type="primary" @click="openDialog()">新增数据</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="Id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="Img" label="企业Logo">
+      <el-table-column prop="id" label="序号" width="180"></el-table-column>
+      <el-table-column prop="img" label="企业Logo">
         <template slot-scope="scope">
-          <img style="width:200px" :src="imgserver+scope.row.Img" alt />
+          <img style="width:200px" :src="imgserver+scope.row.img" alt />
         </template>
       </el-table-column>
-      <el-table-column prop="Remark" label="企业名称" width="180"></el-table-column>
+      <el-table-column prop="remark" label="企业名称" width="180"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
@@ -30,7 +30,7 @@
         <el-form-item label="企业Logo" :label-width="formLabelWidth">
           <el-upload
             class="avatar-uploader"
-            action="http://shkjgw.shkjem.com/api/UpLoad/UploadImage"
+            action="http://localhost:5001/api/File/UploadingFormFile"
             :headers="headers"
             :show-file-list="false"
             :on-success="handleSuccess"
@@ -70,7 +70,7 @@ export default {
     };
   },
   mounted() {
-    let token = "Browser " + sessionStorage.getItem("token");
+    let token = "Bearer " + sessionStorage.getItem("token");
     //window.console.log(token);
     this.options = {
       headers: {
@@ -85,15 +85,15 @@ export default {
   methods: {
     handleSuccess(response, file, fileList) {
       window.console.log(response, file, fileList);
-      this.formData.Img = response;
+      this.formData.Img = response.result;
     },
     loadData() {
       this.loading = true;
       this.$http
-        .get("Enterprise/GetEnterpriseAll")
+        .get("Enterprise")
         .then(response => {
           window.console.log(response);
-          this.tableData = response.data;
+          this.tableData = response.data.result;
           this.loading = false;
         })
         .catch(e => {
@@ -120,7 +120,7 @@ export default {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("Enterprise/CreateEnterprise", this.formData, this.options)
+          .post("Enterprise", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -177,7 +177,7 @@ export default {
           this.loading = true;
           this.$http
             .post(
-              `Enterprise/DeleteEnterprise?id=${row.Id}`,
+              `Enterprise/${row.id}`,
               null,
               this.options
             )

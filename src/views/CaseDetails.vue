@@ -3,10 +3,15 @@
     <banner img="../assets/img/bgtop.jpg" />
     <div class="case-product">
       <div class="case-product-content">
-        <img v-lazy="imgserver+caseIdList.Img" alt />
-        <p class="product-title">{{caseIdList.Title}}</p>
-        <p class="product-time">{{caseIdList.CreateTime}}</p>
-        <p class="product-content">{{caseIdList.Content}}</p>
+        <div class="image-list">
+        <div v-for="(imgName, index) in caseIdList.imgs" :key="index">
+          <img style="width:100%" v-if="imgName" :src="imgserver + imgName" alt />
+          </div>
+        </div>
+        <!-- <img v-lazy="imgserver+caseIdList.imgs[0]" alt /> -->
+        <p class="product-title">{{caseIdList.title}}</p>
+        <p class="product-time">{{caseIdList.createTime}}</p>
+        <p class="product-content">{{caseIdList.content}}</p>
       </div>
     </div>
   </div>
@@ -37,7 +42,7 @@ export default {
         .get(`Cases/GetCasesById/${this.pid}`)
         .then(response => {
           //console.log(response);
-          this.caseIdList = response.data;
+          this.caseIdList = response.data.result;
           window.console.log(this.caseIdList);
         })
         .catch(function(error) {
@@ -49,6 +54,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.image-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-list img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-top: 1px; /* 设置图片顶部的外边距 */
+  margin-bottom: 1px; /* 设置图片底部的外边距 */
+}
+
+// .image-container {
+//     width: 200px; /* 设置容器宽度 */
+//     height: 200px; /* 设置容器高度 */
+//     overflow: hidden; /* 隐藏超出容器的部分 */
+//   }
+
+//   .image-container img {
+//     width: 100%; /* 图片宽度填充容器 */
+//     height: 100%; /* 图片高度填充容器 */
+//     object-fit: cover; /* 等比例缩放并裁剪图片以填充容器 */
+//   }
+
 .case {
   width: 100%;
   height: 100%;

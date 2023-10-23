@@ -3,14 +3,17 @@
     <el-button type="primary" @click="openDialog()">新增案例</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="Id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="Title" label="案例标题" width="180"></el-table-column>
-      <el-table-column prop="Img" label="图片">
+      <el-table-column prop="id" label="序号" width="180"></el-table-column>
+      <el-table-column prop="title" label="案例标题" width="180"></el-table-column>
+      <el-table-column prop="img" label="图片">
         <template slot-scope="scope">
-          <img style="width:100%" :src="imgserver+scope.row.Img" alt />
+          <div v-for="(imgName, index) in scope.row.imgs" :key="index">
+          <img style="width:100%" v-if="imgName" :src="imgserver + imgName" alt />
+          </div>
+          <!-- <img style="width:100%" :src="imgserver+scope.row.img" alt /> -->
         </template>
       </el-table-column>
-      <el-table-column prop="Content" label="案例内容"></el-table-column>
+      <el-table-column prop="content" label="案例内容"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
@@ -33,15 +36,18 @@
         </el-form-item>
         <el-form-item label="案例图片" :label-width="formLabelWidth">
           <!-- :before-upload="beforeAvatarUpload" -->
+          <div v-for="(imgName, index) in formData.Imgs" :key="index">
+          <img v-if="imgName" :src="imgserver + imgName" class="avatar" />
+          </div>
           <el-upload
             class="avatar-uploader"
-            action="http://shkjgw.shkjem.com/api/UpLoad/UploadImage"
+            action="http://localhost:5001/api/File/UploadingFormFile"
             :headers="headers"
+            :multiple="true"
             :show-file-list="false"
             :on-success="handleSuccess"
           >
-            <img v-if="formData.Img" :src="imgserver + formData.Img" class="avatar" />
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+       <i class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
         <el-form-item label="案例内容" :label-width="formLabelWidth">
@@ -66,7 +72,7 @@ export default {
       tableData: [],
       formData: {
         Id: 0,
-        Img: "",
+        Imgs: [],
         Title: "",
         Content: "",
         Del: "",
@@ -77,7 +83,7 @@ export default {
     };
   },
   mounted() {
-    let token = "Browser " + sessionStorage.getItem("token");
+    let token = "Bearer " + sessionStorage.getItem("token");
     //window.console.log(token);
     this.options = {
       headers: {
@@ -93,15 +99,17 @@ export default {
   methods: {
     handleSuccess(response, file, fileList) {
       window.console.log(response, file, fileList);
-      this.formData.Img = response;
+      // this.formData.Img = response.result;
+      this.formData.Imgs.push(response.result);
     },
     loadData() {
       this.loading = true;
       this.$http
-        .get("Cases/GetCasesAll")
+        // .get("Cases/GetCasesAll")
+        .get("Cases")
         .then(response => {
           window.console.log(response);
-          this.tableData = response.data;
+          this.tableData = response.data.result;
           this.loading = false;
         })
         .catch(e => {
@@ -115,6 +123,7 @@ export default {
       // 清除数据
       this.formData.Id = 0;
       this.formData.Img = "";
+      this.formData.Imgs = [];
       this.formData.Title = "";
       this.formData.Content = "";
       this.formData.Del = "";
@@ -130,7 +139,7 @@ export default {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("Cases/CreateCases", this.formData, this.options)
+          .post("Cases", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -150,7 +159,7 @@ export default {
       } else {
         this.loading = true;
         this.$http
-          .post("Cases/ModifiedCases", this.formData, this.options)
+          .post("Cases", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -186,7 +195,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`Cases/DeleteCases?id=${row.Id}`, null, this.options)
+            .post(`Cases/${row.id}`, null, this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);

@@ -1,12 +1,12 @@
 <template>
-  <div class="NewsDetails">
+  <div class="case">
     <banner img="../assets/img/bgtop.jpg" />
-    <div class="NewsDetails-product">
-      <div class="NewsDetails-product-content">
-        <img v-lazy="imgserver+newsIdList.img" alt />
-        <p class="product-title">{{newsIdList.title}}</p>
-        <p class="product-time">{{newsIdList.createTime}}</p>
-        <p class="product-content">{{newsIdList.content}}</p>
+    <div class="case-product">
+      <div class="case-product-content">
+        <img v-lazy="imgserver+caseIdList.img" alt />
+        <p class="product-title">{{caseIdList.title}}</p>
+        <p class="product-time">{{caseIdList.createTime}}</p>
+        <p class="product-content">{{caseIdList.content}}</p>
       </div>
     </div>
   </div>
@@ -15,14 +15,13 @@
 <script>
 import Banner from "../components/Banner";
 export default {
-  name: "NewsDetails",
   components: {
     Banner
   },
   data() {
     return {
       pid: 0,
-      newsIdList: {}
+      caseIdList: {}
     };
   },
   created() {
@@ -35,11 +34,11 @@ export default {
   methods: {
     loadData() {
       this.$http
-        .get(`News/GetNewsById/${this.pid}`)
+        .get(`Cases/GetCasesById/${this.pid}`)
         .then(response => {
           //console.log(response);
-          this.newsIdList = response.data.result;
-          window.console.log(this.newsIdList);
+          this.caseIdList = response.data.result;
+          window.console.log(this.caseIdList);
         })
         .catch(function(error) {
           window.console.log(error);
@@ -50,16 +49,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.NewsDetails {
+.case {
   width: 100%;
   height: 100%;
-  //overflow: hidden;
+  overflow: hidden;
   background-color: #14679f;
   &-product {
     width: 1240px;
     margin: 0 auto;
     background-color: #fff;
-    border: 1px solid red;
+    //border: 1px solid red;
     &-content {
       width: 760px;
       margin: 0 auto;
@@ -69,7 +68,7 @@ export default {
       padding: 50px 0;
       img {
         width: 100%;
-        //height: 500px;
+        height: 430px;
       }
       .product-title {
         font-size: 25px;

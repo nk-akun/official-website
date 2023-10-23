@@ -1,15 +1,16 @@
 <template>
   <div class="cases">
-    <el-button type="primary" @click="openDialog()">新增荣誉</el-button>
+    <el-button type="primary" @click="openDialog()">新增案例</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
       <el-table-column prop="id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="img" label="荣誉图片">
+      <el-table-column prop="title" label="案例标题" width="180"></el-table-column>
+      <el-table-column prop="img" label="图片">
         <template slot-scope="scope">
           <img style="width:100%" :src="imgserver+scope.row.img" alt />
         </template>
       </el-table-column>
-      <el-table-column prop="remark" label="荣誉标题" width="180"></el-table-column>
+      <el-table-column prop="content" label="案例内容"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
@@ -25,22 +26,27 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="合作企业管理" :visible.sync="dialogFormVisible">
+    <el-dialog title="案例编辑" :visible.sync="dialogFormVisible">
       <el-form :model="formData">
-        <el-form-item label="荣誉图片" :label-width="formLabelWidth">
+        <el-form-item label="案例标题" :label-width="formLabelWidth">
+          <el-input v-model="formData.Title" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="案例图片" :label-width="formLabelWidth">
+          <!-- :before-upload="beforeAvatarUpload" -->
           <el-upload
             class="avatar-uploader"
             action="http://localhost:5001/api/File/UploadingFormFile"
             :headers="headers"
+            :multiple="true"
             :show-file-list="false"
             :on-success="handleSuccess"
           >
-            <img v-if="formData.Img" :src="imgserver+formData.Img" class="avatar" />
+            <img v-if="formData.Img" :src="imgserver + formData.Img" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
-        <el-form-item label="荣誉标题" :label-width="formLabelWidth">
-          <el-input v-model="formData.Remark" autocomplete="off"></el-input>
+        <el-form-item label="案例内容" :label-width="formLabelWidth">
+          <el-input v-model="formData.Content" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -62,7 +68,9 @@ export default {
       formData: {
         Id: 0,
         Img: "",
-        Remark: "",
+        Title: "",
+        Content: "",
+        Del: "",
         CreateTime: new Date()
       },
       options: {},
@@ -80,6 +88,7 @@ export default {
     this.headers = {
       Authorization: token
     };
+
     this.loadData();
   },
   methods: {
@@ -90,7 +99,8 @@ export default {
     loadData() {
       this.loading = true;
       this.$http
-        .get("Honor")
+        // .get("Cases/GetCasesAll")
+        .get("Cases")
         .then(response => {
           window.console.log(response);
           this.tableData = response.data.result;
@@ -107,7 +117,9 @@ export default {
       // 清除数据
       this.formData.Id = 0;
       this.formData.Img = "";
-      this.formData.Remark = "";
+      this.formData.Title = "";
+      this.formData.Content = "";
+      this.formData.Del = "";
       this.formData.CreateTime = new Date();
 
       this.dialogFormVisible = true;
@@ -120,7 +132,7 @@ export default {
         // ID 无效时 视为新增
         this.loading = true;
         this.$http
-          .post("Honor", this.formData, this.options)
+          .post("Cases", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -140,7 +152,7 @@ export default {
       } else {
         this.loading = true;
         this.$http
-          .post("Honor/ModifiedHonor", this.formData, this.options)
+          .post("Cases", this.formData, this.options)
           .then(response => {
             this.loading = false;
             window.console.log(response);
@@ -176,7 +188,7 @@ export default {
           // 调接口删除
           this.loading = true;
           this.$http
-            .post(`Honor/${row.id}`, null, this.options)
+            .post(`Cases/${row.id}`, null, this.options)
             .then(response => {
               this.loading = false;
               window.console.log(response);
@@ -215,3 +227,4 @@ export default {
   margin-top: 20px;
 }
 </style>
+

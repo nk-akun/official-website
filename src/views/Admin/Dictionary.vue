@@ -1,11 +1,11 @@
 <template>
   <div class="cases">
-    <el-button type="primary" @click="openDialog()">新增用户</el-button>
+    <el-button type="primary" @click="openDialog()">新增字典</el-button>
 
     <el-table border :data="tableData" v-loading="loading" style="width: 100%">
-      <el-table-column prop="Id" label="序号" width="180"></el-table-column>
-      <el-table-column prop="Key" label="键" width="180"></el-table-column>
-      <el-table-column prop="Content" label="值"></el-table-column>
+      <el-table-column prop="id" label="序号" width="180"></el-table-column>
+      <el-table-column prop="key" label="键" width="180"></el-table-column>
+      <el-table-column prop="content" label="值"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
@@ -56,7 +56,7 @@ export default {
     };
   },
   mounted() {
-    let token = "Browser " + sessionStorage.getItem("token");
+    let token = "Bearer " + sessionStorage.getItem("token");
     //window.console.log(token);
     this.options = {
       headers: {
@@ -70,10 +70,10 @@ export default {
     loadData() {
       this.loading = true;
       this.$http
-        .get(`DataDictionary/GetDataDictionaryAll?key=`)
+        .get(`DataDictionary?key=`)
         .then(response => {
           window.console.log(response);
-          this.tableData = response.data;
+          this.tableData = response.data.result;
           this.loading = false;
         })
         .catch(e => {
@@ -101,7 +101,7 @@ export default {
         this.loading = true;
         this.$http
           .post(
-            "DataDictionary/CreateDataDictionary",
+            "DataDictionary",
             this.formData,
             this.options
           )
@@ -165,7 +165,7 @@ export default {
           this.loading = true;
           this.$http
             .post(
-              `DataDictionary/DeleteDataDictionary?id=${row.Id}`,
+              `DataDictionary/${row.Id}`,
               null,
               this.options
             )

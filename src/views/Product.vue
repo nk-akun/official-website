@@ -2,14 +2,14 @@
   <div class="product">
     <banner img="../assets/img/bgtop.jpg" title="产品中心" />
     <div class="product-content" v-loading="loading">
-      <div class="p-video">
+      <!-- <div class="p-video">
         <video-player
           class="video-player vjs-custom-skin"
           ref="videoPlayer"
           :playsinline="true"
           :options="playerOptions"
         ></video-player>
-      </div>
+      </div> -->
       <div class="lacking">
         <h3 class="title">传统管理模式不足</h3>
         <div class="lacking-bottom">
@@ -149,10 +149,11 @@ export default {
   created() {
     this.$http
       .get(
-        "DataDictionary/GetDataDictionaryAll?key=%E4%BA%A7%E5%93%81%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5"
+        "DataDictionary?key=%E4%BA%A7%E5%93%81%E8%A7%86%E9%A2%91%E9%93%BE%E6%8E%A5"
       )
       .then(response => {
-        this.videoSrc = response.data[0].Content;
+        // console.log(response.data.result);
+        this.videoSrc = response.data.result[0].content;
         window.console.log(this.videoSrc);
         this.loading = false;
       })

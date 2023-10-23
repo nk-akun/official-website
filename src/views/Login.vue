@@ -13,10 +13,10 @@
           label-width="80px"
         >
           <el-form-item label="用户名" prop="name">
-            <el-input name="name" v-model="loginform.name"></el-input>
+            <el-input name="name" v-model="loginform.LoginName"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="pass">
-            <el-input name="password" type="password" v-model="loginform.pass" autocomplete="off"></el-input>
+            <el-input name="password" type="password" v-model="loginform.Password" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="login">登录</el-button>
@@ -36,12 +36,12 @@ export default {
     return {
       labelPosition: "right",
       loginform: {
-        name: "",
-        pass: ""
+        LoginName: "",
+        Password: ""
       },
       rules: {
-        name: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-        pass: [
+        LoginName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+        Password: [
           { required: true, message: "请输入密码", trigger: "blur" },
           {
             min: 5,
@@ -58,17 +58,18 @@ export default {
       this.$refs.lform.validate(valid => {
         if (valid) {
           this.$http
-            .get(
-              `User/Login?strUser=${this.loginform.name}&strPwd=${this.loginform.pass}`
-            )
+          .post("account/Login",this.loginform,this.options)
+            // .get(
+            //   `User/Login?strUser=${this.loginform.name}&strPwd=${this.loginform.pass}`
+            // )
             .then(response => {
               window.console.log(response);
-              if (response.data.bRes) {
+              if (response.data.isSuccess) {
                 this.$message({
                   message: "登录成功了呢",
                   type: "success"
                 });
-                sessionStorage.setItem("token", response.data.Ticket);
+                sessionStorage.setItem("token", response.data.result);
                 this.$router.push({ name: "admin" });
               } else {
                 this.$message({
