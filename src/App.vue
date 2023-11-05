@@ -89,7 +89,6 @@ html,
 body {
   height: 100%;
 }
-
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -119,7 +118,8 @@ body {
 }
 
 .footer {
-  width: 100%;
+  // width: 100%;
+  width: 1240px;
   height: 216px;
   overflow: hidden;
   background-color: #14679f;
@@ -136,7 +136,7 @@ body {
         display: flex;
         flex-direction: column;
         padding: 0 20px;
-        //justify-content: center;
+        // justify-content: center;
         align-items: flex-start;
         p {
           font-size: 20px;
@@ -165,4 +165,11 @@ body {
     }
   }
 }
+
+@media screen and (max-width: 1240px) {
+    .el-main {
+      width: 1240px !important;
+    }
+}
+
 </style>
