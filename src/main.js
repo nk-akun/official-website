@@ -44,7 +44,7 @@ Vue.prototype.$http = axios
 // Vue.prototype.imgserver = 'http://shkjgw.shkjem.com/'
 // Vue.prototype.imgserver = 'http://10.82.42.163:8000/image'
 // Vue.prototype.imgserver = 'http://192.168.1.9:8000/image'
-Vue.prototype.imgserver = 'http://43.138.21.182/image/'
+Vue.prototype.imgserver = 'http://43.138.21.182/image'
 
 // new Vue({
 //   router,
