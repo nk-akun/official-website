@@ -41,7 +41,7 @@
           </div>
           <el-upload
             class="avatar-uploader"
-            action="http://localhost:5001/api/File/UploadingFormFile"
+            action="http://43.138.21.182/api/File/UploadingFormFile"
             :headers="headers"
             :multiple="true"
             :show-file-list="false"
