@@ -23,8 +23,10 @@
         <div class="content-nav-item">
           <div class="item-list" v-for="(item,index) in newsList" :key="index">
             <div class="item-img" v-lazy:background-image="imgserver + item.img"></div>
-
-            <p class="item-list-title">{{item.title}}</p>
+            <!-- <p class="item-list-title">{{item.title}}</p> -->
+            <router-link :to="{ name: 'newsdetails', params: { id: item.id }}" class="text-decoration item-list-title">
+              <p>{{item.title}}</p>
+            </router-link>
             <p class="item-list-content">{{item.content}}</p>
             <div class="item-list-more">
               <router-link
@@ -32,7 +34,7 @@
                 :to="{ name: 'newsdetails', params: { id: item.id }}"
               >
                 <img src="../assets/img/sanjiao.png" />
-                <span>more</span>
+                <span>阅读全文</span>
               </router-link>
             </div>
           </div>

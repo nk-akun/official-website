@@ -27,7 +27,7 @@
                 <p class="hover-title">{{item.title}}</p>
                 <div class="bottom"></div>
                 <div class="more">
-                  <span>MORE</span>
+                  <span>查看全文</span>
                 </div>
               </div>
             </router-link>

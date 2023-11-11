@@ -14,7 +14,7 @@
         >
           <el-menu-item index="/">首页</el-menu-item>
           <el-menu-item index="/news">新闻资讯</el-menu-item>
-          <el-menu-item index="/product">产品中心</el-menu-item>
+          <!-- <el-menu-item index="/product">产品中心</el-menu-item> -->
           <el-menu-item index="/case">经典案例</el-menu-item>
           <el-menu-item index="/goin">走进富钢柏益</el-menu-item>
           <el-menu-item index="/download">其他</el-menu-item>
@@ -124,6 +124,7 @@ body {
   overflow: hidden;
   background-color: #14679f;
   &-content {
+    // width: 100%;
     width: 1240px;
     margin: 0 auto;
     padding-top: 20px;
