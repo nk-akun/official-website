@@ -118,8 +118,8 @@ body {
 }
 
 .footer {
-  // width: 100%;
-  width: 1240px;
+  width: 100%;
+  // width: 1240px;
   height: 216px;
   overflow: hidden;
   background-color: #14679f;

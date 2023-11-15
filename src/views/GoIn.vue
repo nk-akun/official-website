@@ -56,7 +56,7 @@
         <div class="content-culture">
           <h3>企业文化</h3>
           <h3>CULTURE</h3>
-          <p>我们只专注一件事情——工程项目管理</p>
+          <p>我们只专注一件事情——模架生产与管理</p>
           <span>确保工程无重大安全事故</span>
           <span>确保工程施工单位无大面积返工</span>
           <span>确保工程材料及设备无伪劣产品</span>
