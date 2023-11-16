@@ -17,7 +17,7 @@
           <li
             v-for="(item,index) in caseList"
             :key="index"
-            v-lazy:background-image="imgserver + item.img"
+            v-lazy:background-image="imgserver + item.imgs[0]"
           >
             <router-link
               class="text-decoration"

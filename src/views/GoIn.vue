@@ -155,13 +155,13 @@ export default {
             this.partnerImg = responseEnterprise.data.result;
             this.teamItem = responseTeam.data.result;
 
-            var groupCount = Math.ceil(responseCourse.data.length / 2);
+            var groupCount = Math.ceil(responseCourse.data.result.length / 2);
             window.console.log(groupCount);
             for (let i = 0; i < groupCount; i++) {
               let img2 = [];
               for (let j = 0; j < 2; j++) {
-                if (responseCourse.data.length - 1 >= i * 2 + j) {
-                  img2.push(responseCourse.data[i * 2 + j]);
+                if (responseCourse.data.result.length - 1 >= i * 2 + j) {
+                  img2.push(responseCourse.data.result[i * 2 + j]);
                 }
               }
               this.courseList.push(img2);

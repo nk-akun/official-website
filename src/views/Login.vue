@@ -66,7 +66,7 @@ export default {
               window.console.log(response);
               if (response.data.isSuccess) {
                 this.$message({
-                  message: "登录成功了呢",
+                  message: "登录成功",
                   type: "success"
                 });
                 sessionStorage.setItem("token", response.data.result);
