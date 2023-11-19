@@ -16,7 +16,7 @@
               <i class="el-icon-location-outline"></i>产品信息管理
             </template>
             <el-menu-item index="/admin/products/product1"> 桥梁模板 </el-menu-item>
-            <el-menu-item index="/admin/products/product2"> 房间模板 </el-menu-item>
+            <el-menu-item index="/admin/products/product2"> 房建模板 </el-menu-item>
             <el-menu-item index="/admin/products/product3"> 全铝模板 </el-menu-item>
             <el-menu-item index="/admin/products/product4"> 建筑机械 </el-menu-item>
             <el-menu-item index="/admin/products/product5"> 模板配件 </el-menu-item>
