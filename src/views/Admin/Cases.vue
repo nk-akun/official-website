@@ -40,14 +40,18 @@
           <img v-if="imgName" :src="imgserver + imgName" class="avatar" />
           </div>
           <el-upload
+            drag
             class="avatar-uploader"
             action="http://富钢柏益.com/api/File/UploadingFormFile"
             :headers="headers"
             :multiple="true"
             :show-file-list="false"
+            :before-upload="beforeAvatarUpload"
             :on-success="handleSuccess"
           >
        <i class="el-icon-plus avatar-uploader-icon"></i>
+       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+      <div class="el-upload__tip" slot="tip">支持单个或批量上传，支持拖拽上传</div>
           </el-upload>
         </el-form-item>
         <el-form-item label="案例内容" :label-width="formLabelWidth">
