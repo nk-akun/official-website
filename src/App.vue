@@ -14,6 +14,15 @@
         >
           <el-menu-item index="/">首页</el-menu-item>
           <!-- <el-menu-item index="/product">产品中心</el-menu-item> -->
+          <el-submenu index="/product">
+            <template slot="title">产品中心</template>
+            <el-menu-item index="/product1">桥梁模板</el-menu-item>
+            <el-menu-item index="/product2">房建模板</el-menu-item>
+            <el-menu-item index="/product3">全铝模板</el-menu-item>
+            <el-menu-item index="/product4">建筑机械</el-menu-item>
+            <el-menu-item index="/product5">模板配件</el-menu-item>
+            <el-menu-item index="/product6">钢结构</el-menu-item>
+          </el-submenu>
           <el-menu-item index="/case">经典案例</el-menu-item>
           <el-menu-item index="/news">新闻资讯</el-menu-item>
           <el-menu-item index="/goin">走进富钢柏益</el-menu-item>

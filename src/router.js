@@ -20,9 +20,34 @@ let kejianrouter = new Router({
       component: () => import('./views/NewsDetails.vue'),
     },
     {
-      path: '/product',
-      name: 'product',
-      component: () => import('./views/Product.vue'),
+      path: '/product1',
+      name: 'product1',
+      component: () => import('./views/Product1.vue'),
+    },
+    {
+      path: '/product2',
+      name: 'product2',
+      component: () => import('./views/Product2.vue'),
+    },
+    {
+      path: '/product3',
+      name: 'product3',
+      component: () => import('./views/Product3.vue'),
+    },
+    {
+      path: '/product4',
+      name: 'product4',
+      component: () => import('./views/Product4.vue'),
+    },
+    {
+      path: '/product5',
+      name: 'product5',
+      component: () => import('./views/Product5.vue'),
+    },
+    {
+      path: '/product6',
+      name: 'product6',
+      component: () => import('./views/Product6.vue'),
     },
     {
       path: '/case',
@@ -70,6 +95,36 @@ let kejianrouter = new Router({
           path: '/admin/cases',
           name: 'cases',
           component: () => import('./views/Admin/Cases.vue')
+        },
+        {
+          path: '/admin/products/product1',
+          name: 'product1',
+          component: () => import('./views/Admin/Product1.vue')
+        },
+        {
+          path: '/admin/products/product2',
+          name: 'product2',
+          component: () => import('./views/Admin/Product2.vue')
+        },
+        {
+          path: '/admin/products/product3',
+          name: 'product3',
+          component: () => import('./views/Admin/Product3.vue')
+        },
+        {
+          path: '/admin/products/product4',
+          name: 'product4',
+          component: () => import('./views/Admin/Product4.vue')
+        },
+        {
+          path: '/admin/products/product5',
+          name: 'product5',
+          component: () => import('./views/Admin/Product5.vue')
+        },
+        {
+          path: '/admin/products/product6',
+          name: 'product6',
+          component: () => import('./views/Admin/Product6.vue')
         },
         {
           path: '/admin/team',

@@ -11,6 +11,17 @@
             <i class="el-icon-news"></i>
             <span slot="title">新闻咨询管理</span>
           </el-menu-item>
+          <el-submenu index="/admin/products">
+            <template slot="title">
+              <i class="el-icon-location-outline"></i>产品信息管理
+            </template>
+            <el-menu-item index="/admin/products/product1"> 桥梁模板 </el-menu-item>
+            <el-menu-item index="/admin/products/product2"> 房间模板 </el-menu-item>
+            <el-menu-item index="/admin/products/product3"> 全铝模板 </el-menu-item>
+            <el-menu-item index="/admin/products/product4"> 建筑机械 </el-menu-item>
+            <el-menu-item index="/admin/products/product5"> 模板配件 </el-menu-item>
+            <el-menu-item index="/admin/products/product6"> 钢结构 </el-menu-item>
+          </el-submenu>
           <el-menu-item index="/admin/cases">
             <i class="el-icon-location-outline"></i>
             <span slot="title">案例信息管理</span>
