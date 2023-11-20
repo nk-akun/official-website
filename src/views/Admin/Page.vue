@@ -51,7 +51,7 @@ export default {
       this.loading = true;
       this.$http
         .get(
-          `http://fgby1688.com/api/User?name=${this.formInline.name}&age=${this.formInline.age}&pageIndex=${this.pageIndex}&pageSize=${this.pageSize}`
+          `http://富钢柏益.com/api/User?name=${this.formInline.name}&age=${this.formInline.age}&pageIndex=${this.pageIndex}&pageSize=${this.pageSize}`
         )
         .then(response => {
           window.console.log(response);

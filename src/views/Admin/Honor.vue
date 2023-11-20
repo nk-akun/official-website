@@ -30,7 +30,7 @@
         <el-form-item label="荣誉图片" :label-width="formLabelWidth">
           <el-upload
             class="avatar-uploader"
-            action="http://fgby1688.com/api/File/UploadingFormFile"
+            action="http://富钢柏益.com/api/File/UploadingFormFile"
             :headers="headers"
             :show-file-list="false"
             :on-success="handleSuccess"
