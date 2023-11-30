@@ -35,7 +35,7 @@
           <!-- :before-upload="beforeAvatarUpload" -->
           <el-upload
             class="avatar-uploader"
-            action="http://富钢柏益.com/api/File/UploadingFormFile"
+            action="http://fgby1688.com/api/File/UploadingFormFile"
             :headers="headers"
             :multiple="true"
             :show-file-list="false"
