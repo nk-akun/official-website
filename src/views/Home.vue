@@ -1,5 +1,14 @@
 <template>
   <div class="home" v-loading="loading">
+    <!-- 添加一个类为 'contact-info' 的 div 在页面右上角 -->
+    <div class="contact-info">
+      <p>联系我们</p>
+      <p>邮箱：fgby1688@126.com</p>
+      <p>电话：0534-4561688</p>
+      <p>手机：15611177999</p>
+      <p>地址：山东省德州市平原县王杲铺镇王杲铺工业园</p>
+      <div class="qrcode"><img src="../assets/img/ercode.png" alt="二维码" /></div>
+    </div>
     <swiper id="swiperBox" v-bind:options="swiperOption" ref="mySwiper">
       <swiper-slide class="swiper-slide slide-one">
         <div class="page">
@@ -141,6 +150,29 @@ export default {
 </script>
  
 <style lang="scss" scoped>
+
+/* 设置 'contact-info' 样式 */
+.contact-info {
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  font-size: 23px;
+  color: #1ac8d1;   /* 根据你的页面背景颜色调整字体颜色 */
+  text-align: left;
+  z-index: 100;    // 设置一个较高的 z-index 值
+}
+
+.qrcode {
+  position: absolute;
+  top: 7px;
+  right: 5px;
+  text-align: right;
+}
+
+.qrcode img {
+  width: 105px;
+  height: 105px;
+}
 /* .el-header {
   position: absolute;
 } */

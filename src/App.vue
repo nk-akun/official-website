@@ -40,7 +40,8 @@
               <span>发展历程</span>
               <span>企业文化</span>
               <span>资质荣誉</span>
-              <span>合作伙伴</span>
+              <!-- <span>合作伙伴</span> -->
+              <a href="https://beian.miit.gov.cn/" target="_blank">鲁ICP备2023039758号-2</a>
             </li>
             <li>
               <p>新闻资讯</p>
